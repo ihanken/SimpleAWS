@@ -54,7 +54,7 @@ public class Cognito {
         AWSServiceManager.default().defaultServiceConfiguration = serviceConfiguration
         let userPoolConfiguration = AWSCognitoIdentityUserPoolConfiguration(clientId: clientID, clientSecret: clientSecret, poolId: poolID)
         AWSCognitoIdentityUserPool.register(with: serviceConfiguration, userPoolConfiguration: userPoolConfiguration, forKey: "UserPool")
-        let pool = AWSCognitoIdentityUserPool(forKey: "UserPool")
+        _ = AWSCognitoIdentityUserPool(forKey: "UserPool")
     }
     // Type aliases for AWSCognitoIdentyProvider Tasks.
     
