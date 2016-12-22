@@ -1,0 +1,36 @@
+{
+  "name": "SimpleAWS",
+  "version": "0.1.0",
+  "summary": "SimpleAWS",
+  "description": "TODO: Add long description of the pod here.",
+  "homepage": "https://github.com/<GITHUB_USERNAME>/SimpleAWS",
+  "license": {
+    "type": "MIT",
+    "file": "LICENSE"
+  },
+  "authors": {
+    "ihanken": "ihanken@bellsouth.net"
+  },
+  "source": {
+    "git": "https://github.com/<GITHUB_USERNAME>/SimpleAWS.git",
+    "tag": "0.1.0"
+  },
+  "platforms": {
+    "ios": "8.0"
+  },
+  "source_files": "SimpleAWS/Classes/**/*",
+  "dependencies": {
+    "AWSCore": [
+
+    ],
+    "AWSCognito": [
+
+    ],
+    "AWSCognitoIdentityProvider": [
+
+    ],
+    "AWSDynamoDB": [
+
+    ]
+  }
+}

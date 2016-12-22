@@ -1,0 +1,6 @@
+framework module SimpleAWS {
+  umbrella header "SimpleAWS-umbrella.h"
+
+  export *
+  module * { export * }
+}

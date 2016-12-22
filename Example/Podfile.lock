@@ -1,0 +1,31 @@
+PODS:
+  - AWSCognito (2.4.16):
+    - AWSCore (= 2.4.16)
+  - AWSCognitoIdentityProvider (2.4.16):
+    - AWSCore (= 2.4.16)
+  - AWSCore (2.4.16)
+  - AWSDynamoDB (2.4.16):
+    - AWSCore (= 2.4.16)
+  - SimpleAWS (0.1.0):
+    - AWSCognito
+    - AWSCognitoIdentityProvider
+    - AWSCore
+    - AWSDynamoDB
+
+DEPENDENCIES:
+  - SimpleAWS (from `../`)
+
+EXTERNAL SOURCES:
+  SimpleAWS:
+    :path: "../"
+
+SPEC CHECKSUMS:
+  AWSCognito: 666dba6eb65ac27faad79e83febf25630913aefc
+  AWSCognitoIdentityProvider: 1c74bb819fc5f74a708a4a8e0be8b235a959ab86
+  AWSCore: 7c3c129991e6387bcbad7132bc3661e7135754db
+  AWSDynamoDB: e6fc88dca72b2efee4492729d96ed945b9f3a224
+  SimpleAWS: 8d5ed0ab6b24ab5b954aa3b62b36fd269d13368b
+
+PODFILE CHECKSUM: cef988a36b60f0dadf709c2f15a7135a50360050
+
+COCOAPODS: 1.2.0.beta.1

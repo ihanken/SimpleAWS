@@ -1,6 +1,4 @@
 use_frameworks!
 target 'SimpleAWS_Tests' do
   pod 'SimpleAWS', :path => '../'
-  
-  
 end
