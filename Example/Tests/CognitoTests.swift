@@ -1,9 +1,17 @@
+//
+//  CognitoTests.swift
+//  SimpleAWS
+//
+//  Created by Ian Hanken on Thursday, December 22, 2016.
+//  Copyright © 2016 CocoaPods. All rights reserved.
+//
+
 import UIKit
 import XCTest
 
 @testable import SimpleAWS
 
-class DynamoTests: XCTest {
+class CognitoTests: XCTest {
     
     override func setUp() {
         super.setUp()
@@ -14,11 +22,12 @@ class DynamoTests: XCTest {
     override func tearDown() {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
         super.tearDown()
+        UserDefaults.standard.set(nil, forKey: AWS_EMAIL_KEY)
     }
     
-    func testDBInitialization() {
-        Dynamo.shared.initializeDB()
-        XCTAssert(Dynamo.shared.mapper != nil)
+    func testEmailSetting() {
+        Cognito.shared.setEmail(email: "test@email.com")
+        XCTAssert(UserDefaults.standard.value(forKey: AWS_EMAIL_KEY) != nil)
     }
     
     
