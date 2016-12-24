@@ -84,13 +84,13 @@ public class Cognito {
         return self
     }
     
-    func doSuccess(params: @escaping Response) {
+    func doSuccess(params: AWSTask<AnyObject>) {
         if let closure = success {
             closure(params as! AWSTask<AnyObject>)
         }
     }
     
-    func doFailure(params: @escaping Response) {
+    func doFailure(params: AWSTask<AnyObject>) {
         if let closure = failure {
             closure(params as! AWSTask<AnyObject>)
         }
@@ -362,12 +362,12 @@ public class Cognito {
             if task.error != nil {
                 print(task.error!)
                 print("Trying failure")
-                self.doFailure(params: task as! (AWSTask<AnyObject>) -> ())
+                self.doFailure(params: task as! AWSTask<AnyObject>)
             }
             else {
                 print(task.result!)
                 print("Trying success")
-                self.doSuccess(params: task as! (AWSTask<AnyObject>) -> ())
+                self.doSuccess(params: task as! AWSTask<AnyObject>)
                 
                 self.user = self.userPool?.getUser(self.userEmail!)
             }
