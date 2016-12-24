@@ -86,13 +86,13 @@ public class Cognito {
     
     func doSuccess(params: AWSTask<AnyObject>) {
         if let closure = success {
-            closure(params as! AWSTask<AnyObject>)
+            closure(params)
         }
     }
     
     func doFailure(params: AWSTask<AnyObject>) {
         if let closure = failure {
-            closure(params as! AWSTask<AnyObject>)
+            closure(params)
         }
     }
     
@@ -354,8 +354,6 @@ public class Cognito {
         let email = AWSCognitoIdentityUserAttributeType()
         email?.name = "email"
         email?.value = userEmail!
-        
-        print(email)
         
         // Sign the user up.
         userPool?.signUp(email!.value!, password: userPassword, userAttributes: [email!], validationData: nil).continue(with: AWSExecutor.mainThread(), with: {(task: AWSTask!) -> AnyObject! in            
