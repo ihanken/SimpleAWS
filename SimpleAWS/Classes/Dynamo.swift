@@ -9,7 +9,7 @@
 import Foundation
 import AWSDynamoDB
 
-class Dynamo {
+public class Dynamo {
     
     public static let shared = Dynamo()
     
@@ -29,28 +29,28 @@ class Dynamo {
     var saveRequestSuccessClosure: ((AnyObject?) -> ())?
     var saveRequestFailureClosure: ((AnyObject?) -> ())?
     
-    func onSaveRequestSuccess(closure: @escaping ((AnyObject?) -> ())) {
+    public func onSaveRequestSuccess(closure: @escaping ((AnyObject?) -> ())) {
         saveRequestSuccessClosure = closure
     }
     
-    func onSaveRequestFailure(closure: @escaping ((AnyObject?) -> ())) -> Self {
+    public func onSaveRequestFailure(closure: @escaping ((AnyObject?) -> ())) -> Self {
         saveRequestFailureClosure = closure
         return self
     }
     
-    func doSaveRequestSuccess(params: AnyObject?) {
+    public func doSaveRequestSuccess(params: AnyObject?) {
         if let closure = saveRequestSuccessClosure {
             closure(params)
         }
     }
     
-    func doSaveRequestFailure(params: AnyObject?) {
+    public func doSaveRequestFailure(params: AnyObject?) {
         if let closure = saveRequestFailureClosure {
             closure(params)
         }
     }
     
-    func save(_ object: AWSDynamoDBObjectModel) -> Self {
+    public func save(_ object: AWSDynamoDBObjectModel) -> Self {
         print("Attempting to save.")
         mapper?.save(object).continue({(task: AWSTask!) -> AnyObject! in
             print("In Save closure")
