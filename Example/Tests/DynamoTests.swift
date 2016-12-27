@@ -20,6 +20,4 @@ class DynamoTests: XCTestCase {
         Dynamo.shared.initializeDB()
         XCTAssert(Dynamo.shared.mapper != nil)
     }
-    
-    
 }

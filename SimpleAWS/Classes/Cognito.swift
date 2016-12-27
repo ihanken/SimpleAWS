@@ -44,6 +44,7 @@ public class Cognito {
         print("Setting default email to \(email)")
         
         UserDefaults.standard.set(email, forKey: AWS_EMAIL_KEY)
+        UserDefaults.standard.synchronize()
     }
     
     // Method to set the userPool in AppDelegate.
@@ -55,6 +56,7 @@ public class Cognito {
         let userPoolConfiguration = AWSCognitoIdentityUserPoolConfiguration(clientId: clientID, clientSecret: clientSecret, poolId: poolID)
         AWSCognitoIdentityUserPool.register(with: serviceConfiguration, userPoolConfiguration: userPoolConfiguration, forKey: "UserPool")
         _ = AWSCognitoIdentityUserPool(forKey: "UserPool")
+        print("Pool set up.")
     }
     // Type aliases for AWSCognitoIdentyProvider Tasks.
     
@@ -67,6 +69,32 @@ public class Cognito {
     typealias VerifyAttributeResponse = AWSTask<AWSCognitoIdentityUserVerifyAttributeResponse>
     typealias UserDetailsResponse = AWSTask<AWSCognitoIdentityUserGetDetailsResponse>
     typealias DeleteUserResponse = AWSTask<AnyObject>
+    
+    // MARK: - Test Aliases
+    typealias Response = (AWSTask<AnyObject>) -> ()
+    var success: Response?
+    var failure: Response?
+    
+    func onSuccess(closure: @escaping Response) {
+        success = closure
+    }
+    
+    func onFailure(closure: @escaping Response) -> Self {
+        failure = closure
+        return self
+    }
+    
+    func doSuccess(params: AWSTask<AnyObject>) {
+        if let closure = success {
+            closure(params)
+        }
+    }
+    
+    func doFailure(params: AWSTask<AnyObject>) {
+        if let closure = failure {
+            closure(params)
+        }
+    }
     
     // Type aliases, variables and functions handling sign ups.
     
@@ -328,23 +356,24 @@ public class Cognito {
         email?.value = userEmail!
         
         // Sign the user up.
-        userPool?.signUp(email!.value!, password: userPassword, userAttributes: [email!], validationData: nil).continue(with: AWSExecutor.mainThread(), with: {(task: AWSTask!) -> AnyObject! in
-            
+        userPool?.signUp(email!.value!, password: userPassword, userAttributes: [email!], validationData: nil).continue(with: AWSExecutor.mainThread(), with: {(task: AWSTask!) -> AnyObject! in            
             if task.error != nil {
                 print(task.error!)
-                
-                self.doSignUpFailure(params: task)
+                print("Trying failure")
+                self.doFailure(params: task as! AWSTask<AnyObject>)
             }
             else {
                 print(task.result!)
-                
-                self.doSignUpSuccess(params: task)
+                print("Trying success")
+                self.doSuccess(params: task as! AWSTask<AnyObject>)
                 
                 self.user = self.userPool?.getUser(self.userEmail!)
             }
             
             return nil
         })
+        
+        print("Done signing up.")
         
         return self
     }
