@@ -59,7 +59,7 @@ public class Cognito {
         print("Pool set up.")
     }
     // Type aliases for AWSCognitoIdentyProvider Tasks.
-    
+    /**
     typealias SignUpResponse = AWSTask<AWSCognitoIdentityUserPoolSignUpResponse>
     typealias LogInResponse = AWSTask<AWSCognitoIdentityUserSession>
     typealias ConfirmationResponse = AWSTask<AWSCognitoIdentityUserConfirmSignUpResponse>
@@ -69,6 +69,7 @@ public class Cognito {
     typealias VerifyAttributeResponse = AWSTask<AWSCognitoIdentityUserVerifyAttributeResponse>
     typealias UserDetailsResponse = AWSTask<AWSCognitoIdentityUserGetDetailsResponse>
     typealias DeleteUserResponse = AWSTask<AnyObject>
+    */
     
     // MARK: - Test Aliases
     typealias Response = (AWSTask<AnyObject>) -> ()
@@ -97,7 +98,7 @@ public class Cognito {
     }
     
     // Type aliases, variables and functions handling sign ups.
-    
+    /**
     typealias SignUpClosure = (SignUpResponse) -> ()
     
     var signUpSuccessClosure: SignUpClosure?
@@ -347,9 +348,10 @@ public class Cognito {
             closure(params)
         }
     }
+    **/
     
     // AWSCognitoIdentityProvider authentication methods.
-    func signUp(userPassword: String) -> Self {
+    public func signUp(userPassword: String) -> Self {
         
         let email = AWSCognitoIdentityUserAttributeType()
         email?.name = "email"
@@ -379,20 +381,20 @@ public class Cognito {
     }
     
     // Log the user in.
-    func logIn(userPassword: String) -> Self {
+    public func logIn(userPassword: String) -> Self {
         
         user?.getSession(userEmail!, password: userPassword, validationData: nil).continue(with: AWSExecutor.mainThread(), with: {(task: AWSTask!) -> AnyObject! in
             
             if task.error != nil {
                 print(task.error!)
                 
-                self.doLogInFailure(params: task)
+                self.doFailure(params: task as! AWSTask<AnyObject>)
                 
             }
             else {
                 print(task.result!)
                 
-                self.doLogInSuccess(params: task)
+                self.doSuccess(params: task as! AWSTask<AnyObject>)
             }
             
             return nil
@@ -402,20 +404,20 @@ public class Cognito {
     }
     
     // Confirm the user's email.
-    func confirm(confirmationString: String) -> Self {
+    public func confirm(confirmationString: String) -> Self {
         
         user?.confirmSignUp(confirmationString).continue(with: AWSExecutor.mainThread(), with: {(task: AWSTask!) -> AnyObject! in
             
             if task.error != nil {
                 print(task.error!)
                 
-                self.doConfirmationFailure(params: task)
+                self.doFailure(params: task as! AWSTask<AnyObject>)
                 
             }
             else {
                 print(task.result!)
                 
-                self.doConfirmationSuccess(params: task)
+                self.doSuccess(params: task as! AWSTask<AnyObject>)
             }
             
             return nil
@@ -424,20 +426,20 @@ public class Cognito {
         return self
     }
     
-    func forgotPassword() -> Self {
+    public func forgotPassword() -> Self {
         print(user?.getDetails() ?? "No details found for user.")
         
         user?.forgotPassword().continue(with: AWSExecutor.mainThread(), with: {(task: AWSTask!) -> AnyObject! in
             if task.error != nil {
                 print(task.error!)
                 
-                self.doForgottenPasswordFailure(params: task)
+                self.doFailure(params: task as! AWSTask<AnyObject>)
                 
             }
             else {
                 print(task.result!)
                 
-                self.doForgottenPasswordSuccess(params: task)
+                self.doSuccess(params: task as! AWSTask<AnyObject>)
             }
             
             return nil
@@ -446,19 +448,19 @@ public class Cognito {
         return self
     }
     
-    func confirmForgotPassword(confirmationString: String, passcode: String) -> Self {
+    public func confirmForgotPassword(confirmationString: String, passcode: String) -> Self {
         
         user?.confirmForgotPassword(confirmationString, password: passcode).continue(with: AWSExecutor.mainThread(), with: {(task: AWSTask!) -> AnyObject! in
             if task.error != nil {
                 print(task.error!)
                 
-                self.doForgottenPasswordConfirmationFailure(params: task)
+                self.doFailure(params: task as! AWSTask<AnyObject>)
                 
             }
             else {
                 print(task.result!)
                 
-                self.doForgottenPasswordConfirmationSuccess(params: task)
+                self.doSuccess(params: task as! AWSTask<AnyObject>)
             }
             
             return nil
@@ -467,20 +469,20 @@ public class Cognito {
         return self
     }
     
-    func changePassword(currentPassword: String, proposedPassword: String) -> Self {
+    public func changePassword(currentPassword: String, proposedPassword: String) -> Self {
         
         user?.changePassword(currentPassword, proposedPassword: proposedPassword).continue(with: AWSExecutor.mainThread(), with: {(task: AWSTask!) -> AnyObject! in
             
             if task.error != nil {
                 print(task.error!)
                 
-                self.doChangePasswordFailure(params: task)
+                self.doFailure(params: task as! AWSTask<AnyObject>)
                 
             }
             else {
                 print(task.result!)
                 
-                self.doChangePasswordSuccess(params: task)
+                self.doSuccess(params: task as! AWSTask<AnyObject>)
             }
             
             return nil
@@ -489,19 +491,19 @@ public class Cognito {
         return self
     }
     
-    func verifyUserAtrribute(attribute: String, code: String) -> Self {
+    public func verifyUserAtrribute(attribute: String, code: String) -> Self {
         user?.verifyAttribute(attribute, code: code).continue(with: AWSExecutor.mainThread(), with: {(task: AWSTask!) -> AnyObject! in
             
             if task.error != nil {
                 print(task.error!)
                 
-                self.doVerifyAttributeFailure(params: task)
+                self.doFailure(params: task as! AWSTask<AnyObject>)
                 
             }
             else {
                 print(task.result!)
                 
-                self.doVerifyAttributeSuccess(params: task)
+                self.doSuccess(params: task as! AWSTask<AnyObject>)
             }
             
             return nil
@@ -510,19 +512,19 @@ public class Cognito {
         return self
     }
     
-    func getUserDetails() -> Self {
+    public func getUserDetails() -> Self {
         user?.getDetails().continue(with: AWSExecutor.mainThread(), with: {(task: AWSTask!) -> AnyObject! in
             
             if task.error != nil {
                 print(task.error!)
                 
-                self.doUserDetailsFailure(params: task)
+                self.doFailure(params: task as! AWSTask<AnyObject>)
                 
             }
             else {
                 print(task.result!)
                 
-                self.doUserDetailsSuccess(params: task)
+                self.doSuccess(params: task as! AWSTask<AnyObject>)
             }
             
             return nil
@@ -531,19 +533,19 @@ public class Cognito {
         return self
     }
     
-    func deleteUser() -> Self {
+    public func deleteUser() -> Self {
         user?.delete().continue(with: AWSExecutor.mainThread(), with: {(task: AWSTask!) -> AnyObject! in
             
             if task.error != nil {
                 print(task.error!)
                 
-                self.doDeleteUserFailure(params: task)
+                self.doFailure(params: task as! AWSTask<AnyObject>)
                 
             }
             else {
                 print(task.result!)
                 
-                self.doDeleteUserSuccess(params: task)
+                self.doSuccess(params: task as! AWSTask<AnyObject>)
             }
             
             return nil
