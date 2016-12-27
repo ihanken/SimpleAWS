@@ -72,26 +72,26 @@ public class Cognito {
     */
     
     // MARK: - Test Aliases
-    typealias Response = (AWSTask<AnyObject>) -> ()
-    var success: Response?
-    var failure: Response?
+    public typealias Response = (AWSTask<AnyObject>) -> ()
+    public var success: Response?
+    public var failure: Response?
     
-    func onSuccess(closure: @escaping Response) {
+    public func onSuccess(closure: @escaping Response) {
         success = closure
     }
     
-    func onFailure(closure: @escaping Response) -> Self {
+    public func onFailure(closure: @escaping Response) -> Self {
         failure = closure
         return self
     }
     
-    func doSuccess(params: AWSTask<AnyObject>) {
+    public func doSuccess(params: AWSTask<AnyObject>) {
         if let closure = success {
             closure(params)
         }
     }
     
-    func doFailure(params: AWSTask<AnyObject>) {
+    public func doFailure(params: AWSTask<AnyObject>) {
         if let closure = failure {
             closure(params)
         }
