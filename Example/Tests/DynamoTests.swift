@@ -3,7 +3,7 @@ import XCTest
 
 @testable import SimpleAWS
 
-class DynamoTests: XCTest {
+class DynamoTests: XCTestCase {
     
     override func setUp() {
         super.setUp()
@@ -20,6 +20,4 @@ class DynamoTests: XCTest {
         Dynamo.shared.initializeDB()
         XCTAssert(Dynamo.shared.mapper != nil)
     }
-    
-    
 }
