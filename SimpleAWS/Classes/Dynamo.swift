@@ -17,35 +17,34 @@ public class Dynamo {
     
     var mapper: AWSDynamoDBObjectMapper? = nil
     
+    // Set up the mapper so DynamoDB can be used.
     public func initializeDB() {
-        
         mapper = AWSDynamoDBObjectMapper.default()
     }
     
-    //MARK: - SaveRequest type aliases, closures, and functions.
+    // MARK: - Type Aliases, closures, and closure functions
+    public typealias Response = (AWSTask<AnyObject>) -> ()
     
-    typealias SaveRequestClosure = (AnyObject!) -> Void
+    public var success: Response?
+    public var failure: Response?
     
-    var saveRequestSuccessClosure: ((AnyObject?) -> ())?
-    var saveRequestFailureClosure: ((AnyObject?) -> ())?
-    
-    public func onSaveRequestSuccess(closure: @escaping ((AnyObject?) -> ())) {
-        saveRequestSuccessClosure = closure
+    public func onSuccess(closure: @escaping Response) {
+        success = closure
     }
     
-    public func onSaveRequestFailure(closure: @escaping ((AnyObject?) -> ())) -> Self {
-        saveRequestFailureClosure = closure
+    public func onFailure(closure: @escaping Response) -> Self {
+        failure = closure
         return self
     }
     
-    public func doSaveRequestSuccess(params: AnyObject?) {
-        if let closure = saveRequestSuccessClosure {
+    public func doSuccess(params: AWSTask<AnyObject>) {
+        if let closure = success {
             closure(params)
         }
     }
     
-    public func doSaveRequestFailure(params: AnyObject?) {
-        if let closure = saveRequestFailureClosure {
+    public func doFailure(params: AWSTask<AnyObject>) {
+        if let closure = failure {
             closure(params)
         }
     }
@@ -59,13 +58,13 @@ public class Dynamo {
                 print("DynamoDBSaveError: \(task.error!)")
                 print(task.error!)
                 
-                self.doSaveRequestFailure(params: task)
+                self.doFailure(params: task)
                 
             }
             else {
                 print(task.result!)
                 
-                self.doSaveRequestSuccess(params: task)
+                self.doSuccess(params: task)
             }
             
             return nil
