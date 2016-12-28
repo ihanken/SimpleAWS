@@ -17,6 +17,8 @@ class CognitoTests: XCTestCase {
     override func setUp() {
         super.setUp()
         // Put setup code here. This method is called before the invocation of each test method in the class.
+        
+        Cognito.shared.setEmail(email: "test@email.com")
     }
     
     override func tearDown() {
@@ -26,7 +28,10 @@ class CognitoTests: XCTestCase {
     }
     
     func testEmailSetting() {
-        Cognito.shared.setEmail(email: "test@email.com")
         XCTAssert(UserDefaults.standard.value(forKey: AWS_EMAIL_KEY) != nil)
+    }
+    
+    func testSignUpSuccess() {
+        
     }
 }

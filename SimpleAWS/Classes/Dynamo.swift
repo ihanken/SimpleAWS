@@ -38,37 +38,39 @@ public class Dynamo {
     }
     
     public func doSuccess(params: AWSTask<AnyObject>) {
-        if let closure = success {
-            closure(params)
-        }
+        if let closure = success { closure(params) }
     }
     
     public func doFailure(params: AWSTask<AnyObject>) {
-        if let closure = failure {
-            closure(params)
+        if let closure = failure { closure(params) }
+    }
+    
+    public func handleBlock(task: AWSTask<AnyObject>) {
+        if task.error != nil {
+            print(task.error!)
+            
+            self.doFailure(params: task)
+        }
+        else {
+            print(task.result!)
+            
+            self.doSuccess(params: task)
         }
     }
     
     public func save(_ object: AWSDynamoDBObjectModel) -> Self {
-        print("Attempting to save.")
         mapper?.save(object).continue({(task: AWSTask!) -> AnyObject! in
-            print("In Save closure")
-            
-            if task.error != nil {
-                print("DynamoDBSaveError: \(task.error!)")
-                print(task.error!)
-                
-                self.doFailure(params: task)
-                
-            }
-            else {
-                print(task.result!)
-                
-                self.doSuccess(params: task)
-            }
-            
+            self.handleBlock(task: task)
             return nil
-            
+        })
+        
+        return self
+    }
+    
+    public func delete(_ object: AWSDynamoDBObjectModel) -> Self {
+        mapper?.remove(object).continue({(task: AWSTask!) -> AnyObject! in
+            self.handleBlock(task: task)
+            return nil
         })
         
         return self
