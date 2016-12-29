@@ -114,6 +114,8 @@
 		7C735504DFD6A239D569D4C86E73329F /* AWSCognitoSQLiteManager.h in Headers */ = {isa = PBXBuildFile; fileRef = B16ECD407703D7A0478674B41511B704 /* AWSCognitoSQLiteManager.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		7FFD95A81EACC1CC93F80268E6409A79 /* AWSDynamoDBModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6780E51424667FE79CBD79642336FE72 /* AWSDynamoDBModel.m */; };
 		80954D5FBA50CA415AFF0CD04085070C /* AWSCognitoDataset.m in Sources */ = {isa = PBXBuildFile; fileRef = D135096BACF98032E712D019F6322930 /* AWSCognitoDataset.m */; };
+		85BFB0D41E1440C5000B874B /* Enums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85BFB0D21E143EC8000B874B /* Enums.swift */; };
+		85BFB0D81E1486BD000B874B /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85BFB0D61E1486AE000B874B /* LoginViewController.swift */; };
 		87E5455841C1FEACABAA2750EA2DBBA5 /* AWSCognitoIdentityProviderModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 5550C1B518A2CED9988DD678A1F3E586 /* AWSCognitoIdentityProviderModel.m */; };
 		88212437E73C931EAF05C1FD886B4193 /* AWSCognitoUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = D050173A53091DD79B95C0D86C249042 /* AWSCognitoUtil.m */; };
 		8972588468B17CED3ABB7D722FE014F5 /* AWSCognitoIdentityProvider-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D76DEFDF39C9C540D68E5490B67FA80 /* AWSCognitoIdentityProvider-dummy.m */; };
@@ -454,6 +456,8 @@
 		844B13336F98B62DC9CA471AF8088C14 /* AWSCancellationTokenRegistration.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = AWSCancellationTokenRegistration.m; path = AWSCore/Bolts/AWSCancellationTokenRegistration.m; sourceTree = "<group>"; };
 		850B73F77AA7DAA0B7851D7E824CF090 /* AWSCognito.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = AWSCognito.modulemap; sourceTree = "<group>"; };
 		85AB5643B5B9D4D06061F6652B6225E3 /* NSData+AWSCognitoIdentityProvider.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "NSData+AWSCognitoIdentityProvider.h"; path = "AWSCognitoIdentityProvider/Internal/NSData+AWSCognitoIdentityProvider.h"; sourceTree = "<group>"; };
+		85BFB0D21E143EC8000B874B /* Enums.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Enums.swift; sourceTree = "<group>"; };
+		85BFB0D61E1486AE000B874B /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		868B86038A302B8D734399DE3959B3B2 /* AWSFMDB.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = AWSFMDB.h; path = AWSCore/FMDB/AWSFMDB.h; sourceTree = "<group>"; };
 		87DE67E5C45E63C312DE0DAB56463983 /* AWSCancellationToken.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = AWSCancellationToken.m; path = AWSCore/Bolts/AWSCancellationToken.m; sourceTree = "<group>"; };
 		881312DF414648CD814F7DE60EB6724E /* AWSCognitoIdentityModel.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = AWSCognitoIdentityModel.m; path = AWSCore/CognitoIdentity/AWSCognitoIdentityModel.m; sourceTree = "<group>"; };
@@ -652,6 +656,7 @@
 			children = (
 				0157513A4877B686D54A5F5A3292A63C /* Cognito.swift */,
 				3F71106512789628C5A6113A3900D8E8 /* Dynamo.swift */,
+				85BFB0D21E143EC8000B874B /* Enums.swift */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -691,6 +696,7 @@
 		22A778756D05F76B30F8EB2D233C550E /* SimpleAWS */ = {
 			isa = PBXGroup;
 			children = (
+				85BFB0D51E14869C000B874B /* VCs */,
 				0AEE67A0356A41B0543EFC667BB52393 /* Classes */,
 			);
 			path = SimpleAWS;
@@ -788,6 +794,15 @@
 			);
 			name = "Support Files";
 			path = "../Target Support Files/AWSDynamoDB";
+			sourceTree = "<group>";
+		};
+		85BFB0D51E14869C000B874B /* VCs */ = {
+			isa = PBXGroup;
+			children = (
+				85BFB0D61E1486AE000B874B /* LoginViewController.swift */,
+			);
+			name = VCs;
+			path = Classes;
 			sourceTree = "<group>";
 		};
 		87095A7B9CD8CB7075A15EC39DFDCB3C /* Support Files */ = {
@@ -1493,6 +1508,8 @@
 			files = (
 				16265F4C7DB8977EE6F49332607307FA /* Cognito.swift in Sources */,
 				A26C69F58A4735C126CB5CAED30F19DD /* Dynamo.swift in Sources */,
+				85BFB0D41E1440C5000B874B /* Enums.swift in Sources */,
+				85BFB0D81E1486BD000B874B /* LoginViewController.swift in Sources */,
 				E0FAF804698B3ACA135D45996A5FB9A6 /* SimpleAWS-dummy.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
