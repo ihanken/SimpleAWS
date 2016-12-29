@@ -1,6 +1,6 @@
 //
-//  2NyteDynamoDB.swift
-//  2Nyte
+//  Dynamo.swift
+//  SimpleAWS
 //
 //  Created by Ian Hanken on 12/13/16.
 //  Copyright © 2016 Ian Hanken. All rights reserved.
