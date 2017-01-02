@@ -55,11 +55,11 @@ public class Cognito {
     public var success: Response?
     public var failure: Response?
     
-    public func onSuccess(closure: @escaping Response) {
+    public func onSuccess(closure: Response?) {
         success = closure
     }
     
-    public func onFailure(closure: @escaping Response) -> Self {
+    public func onFailure(closure: Response?) -> Self {
         print("Changing failure closure.")
         failure = closure
         return self
@@ -102,7 +102,7 @@ public class Cognito {
         userPool?.signUp(username, password: password, userAttributes: attributeArray, validationData: nil).continue(with: AWSExecutor.mainThread(), with: {(task: AWSTask!) -> AnyObject! in
             if task.error != nil {
                 print(task.error!)
-                
+
                 self.doFailure(params: task as! AWSTask<AnyObject>)
             }
             else {
@@ -131,6 +131,15 @@ public class Cognito {
     // Confirm a user..
     public func confirm(confirmationString: String) -> Self {
         user?.confirmSignUp(confirmationString).continue(with: AWSExecutor.mainThread(), with: {(task: AWSTask!) -> AnyObject! in
+            self.handleBlock(task: task as! AWSTask<AnyObject>)
+            return nil
+        })
+        
+        return self
+    }
+    
+    public func resendConfirmation() -> Self {
+        user?.resendConfirmationCode().continue(with: AWSExecutor.mainThread(), with: {(task: AWSTask!) -> AnyObject! in
             self.handleBlock(task: task as! AWSTask<AnyObject>)
             return nil
         })
