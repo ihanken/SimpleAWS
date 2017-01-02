@@ -28,11 +28,11 @@ public class Dynamo {
     public var success: Response?
     public var failure: Response?
     
-    public func onSuccess(closure: @escaping Response) {
+    public func onSuccess(closure: Response?) {
         success = closure
     }
     
-    public func onFailure(closure: @escaping Response) -> Self {
+    public func onFailure(closure: Response?) -> Self {
         failure = closure
         return self
     }
