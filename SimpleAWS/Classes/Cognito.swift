@@ -24,6 +24,10 @@ public class Cognito {
     public var userPool: AWSCognitoIdentityUserPool? = nil
     private var user: AWSCognitoIdentityUser? = nil
     
+    // Variables used for Cognito Sync.
+    private var syncClient: AWSCognito? = nil
+    private var dataset: AWSCognitoDataset? = nil
+    
     // Method to set the email when a PasscodeLock is created.
     public func setEmail(email: String) {
         userEmail = email
@@ -32,6 +36,10 @@ public class Cognito {
         // Set the default email so a user can login from app opening.
         UserDefaults.standard.set(email, forKey: AWS_EMAIL_KEY)
         UserDefaults.standard.synchronize()
+        
+        // Initialize or pull dataset.
+        self.syncClient = AWSCognito.default()
+        self.dataset = syncClient?.openOrCreateDataset("UserSettings")
     }
     
     // Method to set the userPool in AppDelegate.
@@ -78,7 +86,10 @@ public class Cognito {
     }
     
     public func handleBlock(task: AWSTask<AnyObject>) {
-        if task.error != nil {
+        if task.isCancelled {
+            print("Task cancelled.")
+        }
+        else if task.error != nil {
             print(task.error!)
             
             self.doFailure(params: task)
@@ -201,7 +212,22 @@ public class Cognito {
     public func deleteUser() -> Self {
         print(user?.getDetails())
         user?.delete().continue(with: AWSExecutor.mainThread(), with: {(task: AWSTask!) -> AnyObject! in
-            print("Inside delete.")
+            self.handleBlock(task: task as! AWSTask<AnyObject>)
+            return nil
+        })
+        
+        return self
+    }
+    
+    // Data Syncing
+    public func getData(key: String) -> Any? { return dataset?.value(forKey: key) }
+    
+    public func addData(key: String, value: Any) { self.dataset?.setValue(value, forKey: key) }
+    
+    public func removeData(key: String) { dataset?.removeObject(forKey: key) }
+    
+    public func syncData() -> Self {
+        dataset?.synchronize().continue(with: AWSExecutor.mainThread(), with: {(task: AWSTask!) -> AnyObject! in
             self.handleBlock(task: task as! AWSTask<AnyObject>)
             return nil
         })
