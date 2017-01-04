@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import AWSCore
 import AWSCognito
 import AWSCognitoIdentityProvider
 
@@ -36,10 +37,6 @@ public class Cognito {
         // Set the default email so a user can login from app opening.
         UserDefaults.standard.set(email, forKey: AWS_EMAIL_KEY)
         UserDefaults.standard.synchronize()
-        
-        // Initialize or pull dataset.
-        self.syncClient = AWSCognito.default()
-        self.dataset = syncClient?.openOrCreateDataset("UserSettings")
     }
     
     // Method to set the userPool in AppDelegate.
@@ -113,7 +110,7 @@ public class Cognito {
         userPool?.signUp(username, password: password, userAttributes: attributeArray, validationData: nil).continue(with: AWSExecutor.mainThread(), with: {(task: AWSTask!) -> AnyObject! in
             if task.error != nil {
                 print(task.error!)
-
+                
                 self.doFailure(params: task as! AWSTask<AnyObject>)
             }
             else {
@@ -133,6 +130,11 @@ public class Cognito {
     public func logIn(userPassword: String) -> Self {
         user?.getSession(userEmail!, password: userPassword, validationData: nil).continue(with: AWSExecutor.mainThread(), with: {(task: AWSTask!) -> AnyObject! in
             self.handleBlock(task: task as! AWSTask<AnyObject>)
+            
+            // Initialize or pull dataset.
+            self.syncClient = AWSCognito.default()
+            self.dataset = self.syncClient?.openOrCreateDataset("UserSettings")
+            
             return nil
         })
         
@@ -220,18 +222,41 @@ public class Cognito {
     }
     
     // Data Syncing
-    public func getData(key: String) -> Any? { return dataset?.value(forKey: key) }
+    public func getData(key: String) -> String? { return dataset?.string(forKey: key) }
     
-    public func addData(key: String, value: Any) { self.dataset?.setValue(value, forKey: key) }
+    public func addData(key: String, value: String) { self.dataset?.setString(value, forKey: key) }
     
     public func removeData(key: String) { dataset?.removeObject(forKey: key) }
     
     public func syncData() -> Self {
         dataset?.synchronize().continue(with: AWSExecutor.mainThread(), with: {(task: AWSTask!) -> AnyObject! in
-            self.handleBlock(task: task as! AWSTask<AnyObject>)
+            if task.isCancelled {
+                print("Task cancelled.")
+            }
+            else if task.error != nil {
+                print(task.error!)
+                
+                self.doFailure(params: task)
+            }
+            else {
+                
+                self.doSuccess(params: task)
+            }
+            
             return nil
         })
         
         return self
+        
     }
+    
+    public func getRecords() -> [AWSCognitoRecord] {
+        if let records = dataset?.getAllRecords() as? [AWSCognitoRecord] {
+            return records
+        }
+        
+        return [AWSCognitoRecord]()
+    }
+    
+    public func getDataSets() -> [Any]! { return syncClient?.listDatasets() }
 }
