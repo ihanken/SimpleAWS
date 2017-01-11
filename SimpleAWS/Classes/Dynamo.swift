@@ -58,7 +58,58 @@ public class Dynamo {
         }
     }
     
-    public func save(_ object: AWSDynamoDBObjectModel) -> Self {
+    // Load an object from the table.
+    public func load(objectClass: AnyClass, hashKey: Any, rangeKey: Any?) -> Self {
+        mapper?.load(objectClass, hashKey: hashKey, rangeKey: rangeKey).continue({(task: AWSTask!) -> AnyObject! in
+            self.handleBlock(task: task)
+            return nil
+        })
+        
+        return self
+    }
+    
+    // Scan the table.
+    public func scan(objectClass: AnyClass, expression: AWSDynamoDBScanExpression) -> Self {
+        mapper?.scan(objectClass, expression: expression).continue({(task: AWSTask!) -> AnyObject! in
+            self.handleBlock(task: task as! AWSTask<AnyObject>)
+            return nil
+        })
+        
+        return self
+    }
+    
+    // Query the table
+    public func query(objectClass: AnyClass, expression: AWSDynamoDBQueryExpression) -> Self {
+        mapper?.query(objectClass, expression: expression).continue({(task: AWSTask!) -> AnyObject! in
+            self.handleBlock(task: task as! AWSTask<AnyObject>)
+            return nil
+        })
+        
+        return self
+    }
+    
+    // Item update.
+    public func update(input: AWSDynamoDBUpdateItemInput) -> Self {
+        AWSDynamoDB.default().updateItem(input).continue({(task: AWSTask!) -> AnyObject! in
+            self.handleBlock(task: task as! AWSTask<AnyObject>)
+            return nil
+        })
+        
+        return self
+    }
+    
+    // Batch write item.
+    public func batchWrite(item: AWSDynamoDBBatchWriteItemInput) -> Self {
+        AWSDynamoDB.default().batchWriteItem(item).continue({(task: AWSTask!) -> AnyObject! in
+            self.handleBlock(task: task as! AWSTask<AnyObject>)
+            return nil
+        })
+        
+        return self
+    }
+    
+    // Save an object to the table.
+    public func save(object: AWSDynamoDBObjectModel) -> Self {
         mapper?.save(object).continue({(task: AWSTask!) -> AnyObject! in
             self.handleBlock(task: task)
             return nil
@@ -67,7 +118,8 @@ public class Dynamo {
         return self
     }
     
-    public func delete(_ object: AWSDynamoDBObjectModel) -> Self {
+    // Delete an object from the table.
+    public func delete(object: AWSDynamoDBObjectModel) -> Self {
         mapper?.remove(object).continue({(task: AWSTask!) -> AnyObject! in
             self.handleBlock(task: task)
             return nil

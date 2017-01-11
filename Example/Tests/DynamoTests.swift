@@ -37,7 +37,7 @@ class DynamoTests: XCTestCase {
         
         print(dynamoObject!)
         
-        Dynamo.shared.save(self.dynamoObject!).onFailure {_ in
+        Dynamo.shared.save(object: self.dynamoObject!).onFailure {_ in
             print("Save failed.")
         }.onSuccess {_ in
             expectation.fulfill()
@@ -50,7 +50,7 @@ class DynamoTests: XCTestCase {
     func testSaveFailure() {
         let expectation = self.expectation(description: "Failure closure entered.")
         
-        Dynamo.shared.save(dynamoObject!).onFailure {_ in
+        Dynamo.shared.save(object: dynamoObject!).onFailure {_ in
             print("Save failed.")
             expectation.fulfill()
         }.onSuccess {_ in 
