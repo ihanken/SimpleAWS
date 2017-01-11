@@ -34,25 +34,4 @@ class CognitoTests: XCTestCase, AWSCognitoIdentityInteractiveAuthenticationDeleg
     func testEmailSetting() {
         XCTAssert(UserDefaults.standard.value(forKey: AWS_EMAIL_KEY) != nil)
     }
-    
-    func testSignUp() {
-        let attributeDict: Dictionary<String, String> = [
-            "email": "ihanken@bellsouth.net"
-        ]
-        
-        let expectation = self.expectation(description: "Success closure entered.")
-        
-        Cognito.shared.signUp(username: "ihanken@bellsouth.net", password: "tE5tP@ss", attributes: attributeDict).onFailure {_ in 
-            print("Failed to sign up user.")
-        }.onSuccess {_ in 
-            print("Successfully signed up user.")
-            expectation.fulfill()
-        }
-        
-        self.waitForExpectations(timeout: 10, handler: nil)
-    }
-    
-    func startPasswordAuthentication() -> AWSCognitoIdentityPasswordAuthentication {
-        return LoginViewController()
-    }
 }
