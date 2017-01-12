@@ -6,11 +6,14 @@ PODS:
   - AWSCore (2.4.16)
   - AWSDynamoDB (2.4.16):
     - AWSCore (= 2.4.16)
-  - SimpleAWS (0.1.0):
+  - AWSS3 (2.4.16):
+    - AWSCore (= 2.4.16)
+  - SimpleAWS (0.1.51):
     - AWSCognito
     - AWSCognitoIdentityProvider
     - AWSCore
     - AWSDynamoDB
+    - AWSS3
 
 DEPENDENCIES:
   - SimpleAWS (from `../`)
@@ -24,8 +27,9 @@ SPEC CHECKSUMS:
   AWSCognitoIdentityProvider: 1c74bb819fc5f74a708a4a8e0be8b235a959ab86
   AWSCore: 7c3c129991e6387bcbad7132bc3661e7135754db
   AWSDynamoDB: e6fc88dca72b2efee4492729d96ed945b9f3a224
-  SimpleAWS: 8d5ed0ab6b24ab5b954aa3b62b36fd269d13368b
+  AWSS3: fef6aa8f8f625df8f67f1b6574fe761f3a4ddc99
+  SimpleAWS: 2871c1f1b36aa5a2dee663ba23af5006d1aebbab
 
 PODFILE CHECKSUM: cef988a36b60f0dadf709c2f15a7135a50360050
 
-COCOAPODS: 1.2.0.beta.1
+COCOAPODS: 1.2.0.beta.3

@@ -1,9 +1,9 @@
 ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES
-FRAMEWORK_SEARCH_PATHS = $(inherited) "$PODS_CONFIGURATION_BUILD_DIR/AWSCognito" "$PODS_CONFIGURATION_BUILD_DIR/AWSCognitoIdentityProvider" "$PODS_CONFIGURATION_BUILD_DIR/AWSCore" "$PODS_CONFIGURATION_BUILD_DIR/AWSDynamoDB" "$PODS_CONFIGURATION_BUILD_DIR/SimpleAWS"
+FRAMEWORK_SEARCH_PATHS = $(inherited) "$PODS_CONFIGURATION_BUILD_DIR/AWSCognito" "$PODS_CONFIGURATION_BUILD_DIR/AWSCognitoIdentityProvider" "$PODS_CONFIGURATION_BUILD_DIR/AWSCore" "$PODS_CONFIGURATION_BUILD_DIR/AWSDynamoDB" "$PODS_CONFIGURATION_BUILD_DIR/AWSS3" "$PODS_CONFIGURATION_BUILD_DIR/SimpleAWS"
 GCC_PREPROCESSOR_DEFINITIONS = $(inherited) COCOAPODS=1
 LD_RUNPATH_SEARCH_PATHS = $(inherited) '@executable_path/Frameworks' '@loader_path/Frameworks'
-OTHER_CFLAGS = $(inherited) -iquote "$PODS_CONFIGURATION_BUILD_DIR/AWSCognito/AWSCognito.framework/Headers" -iquote "$PODS_CONFIGURATION_BUILD_DIR/AWSCognitoIdentityProvider/AWSCognitoIdentityProvider.framework/Headers" -iquote "$PODS_CONFIGURATION_BUILD_DIR/AWSCore/AWSCore.framework/Headers" -iquote "$PODS_CONFIGURATION_BUILD_DIR/AWSDynamoDB/AWSDynamoDB.framework/Headers" -iquote "$PODS_CONFIGURATION_BUILD_DIR/SimpleAWS/SimpleAWS.framework/Headers"
-OTHER_LDFLAGS = $(inherited) -framework "AWSCognito" -framework "AWSCognitoIdentityProvider" -framework "AWSCore" -framework "AWSDynamoDB" -framework "SimpleAWS"
+OTHER_CFLAGS = $(inherited) -iquote "$PODS_CONFIGURATION_BUILD_DIR/AWSCognito/AWSCognito.framework/Headers" -iquote "$PODS_CONFIGURATION_BUILD_DIR/AWSCognitoIdentityProvider/AWSCognitoIdentityProvider.framework/Headers" -iquote "$PODS_CONFIGURATION_BUILD_DIR/AWSCore/AWSCore.framework/Headers" -iquote "$PODS_CONFIGURATION_BUILD_DIR/AWSDynamoDB/AWSDynamoDB.framework/Headers" -iquote "$PODS_CONFIGURATION_BUILD_DIR/AWSS3/AWSS3.framework/Headers" -iquote "$PODS_CONFIGURATION_BUILD_DIR/SimpleAWS/SimpleAWS.framework/Headers"
+OTHER_LDFLAGS = $(inherited) -framework "AWSCognito" -framework "AWSCognitoIdentityProvider" -framework "AWSCore" -framework "AWSDynamoDB" -framework "AWSS3" -framework "SimpleAWS"
 OTHER_SWIFT_FLAGS = $(inherited) "-D" "COCOAPODS"
 PODS_BUILD_DIR = $BUILD_DIR
 PODS_CONFIGURATION_BUILD_DIR = $PODS_BUILD_DIR/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)

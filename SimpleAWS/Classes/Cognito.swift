@@ -212,9 +212,8 @@ public class Cognito {
     
     // Delete the current user.
     public func deleteUser() -> Self {
-        print(user?.getDetails())
         user?.delete().continue(with: AWSExecutor.mainThread(), with: {(task: AWSTask!) -> AnyObject! in
-            self.handleBlock(task: task as! AWSTask<AnyObject>)
+            self.handleBlock(task: task)
             return nil
         })
         
