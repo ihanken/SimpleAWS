@@ -10,5 +10,7 @@ language: objective-c
 # - gem install cocoapods # Since Travis is not always on latest version
 # - pod install --project-directory=Example
 script:
-- xcodebuild -workspace Example/SimpleAWS.xcworkspace -scheme SimpleAWS-Example -sdk iphonesimulator ONLY_ACTIVE_ARCH=NO
-- pod lib lint --allow-warnings
+  - xcodebuild -workspace Example/SimpleAWS.xcworkspace -scheme SimpleAWS-Example -sdk iphonesimulator ONLY_ACTIVE_ARCH=NO
+  - pod lib lint --allow-warnings
+after_success:
+  - bash <(curl -s https://codecov.io/bash)
