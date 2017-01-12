@@ -18,7 +18,11 @@ public class Dynamo {
     var mapper: AWSDynamoDBObjectMapper? = nil
     
     // Set up the mapper so DynamoDB can be used.
-    public func initializeDB() {
+    public func initializeDB(region: AWSRegionType, identityPoolID: String) {
+        let credentialsProvider = AWSCognitoCredentialsProvider(regionType: region, identityPoolId: identityPoolID)
+        let configuration = AWSServiceConfiguration(region: region, credentialsProvider: credentialsProvider)
+        AWSServiceManager.default().defaultServiceConfiguration = configuration
+        
         mapper = AWSDynamoDBObjectMapper.default()
     }
     
