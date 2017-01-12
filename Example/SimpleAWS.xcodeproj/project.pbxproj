@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		19302DAFDB9C96BDA73813AB /* Pods_SimpleAWS_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA5933C539D608F2C0ADE614 /* Pods_SimpleAWS_Tests.framework */; };
 		607FACEC1AFB9204008FA782 /* DynamoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACEB1AFB9204008FA782 /* DynamoTests.swift */; };
+		851A12FA1E27413700419F16 /* S3Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 851A12F91E27413700419F16 /* S3Tests.swift */; };
 		858CC90D1E0C54E900A5782C /* CognitoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 858CC90C1E0C54E900A5782C /* CognitoTests.swift */; };
 /* End PBXBuildFile section */
 
@@ -20,6 +21,7 @@
 		607FACEA1AFB9204008FA782 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		607FACEB1AFB9204008FA782 /* DynamoTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DynamoTests.swift; sourceTree = "<group>"; };
 		68567767C4CF23E702E290DB /* SimpleAWS.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = SimpleAWS.podspec; path = ../SimpleAWS.podspec; sourceTree = "<group>"; };
+		851A12F91E27413700419F16 /* S3Tests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = S3Tests.swift; sourceTree = "<group>"; };
 		858CC90C1E0C54E900A5782C /* CognitoTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CognitoTests.swift; sourceTree = "<group>"; };
 		96F9466933FF9D2EC88E5586 /* Pods-SimpleAWS_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SimpleAWS_Tests.release.xcconfig"; path = "Pods/Target Support Files/Pods-SimpleAWS_Tests/Pods-SimpleAWS_Tests.release.xcconfig"; sourceTree = "<group>"; };
 		AA5933C539D608F2C0ADE614 /* Pods_SimpleAWS_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SimpleAWS_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -61,6 +63,7 @@
 			children = (
 				607FACEB1AFB9204008FA782 /* DynamoTests.swift */,
 				858CC90C1E0C54E900A5782C /* CognitoTests.swift */,
+				851A12F91E27413700419F16 /* S3Tests.swift */,
 				607FACE91AFB9204008FA782 /* Supporting Files */,
 			);
 			path = Tests;
@@ -221,6 +224,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				851A12FA1E27413700419F16 /* S3Tests.swift in Sources */,
 				607FACEC1AFB9204008FA782 /* DynamoTests.swift in Sources */,
 				858CC90D1E0C54E900A5782C /* CognitoTests.swift in Sources */,
 			);

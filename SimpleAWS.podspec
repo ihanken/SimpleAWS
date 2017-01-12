@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'SimpleAWS'
-  s.version          = '0.1.51'
+  s.version          = '0.1.60'
   s.summary          = 'A CocoaPod for simplifying and beautifying AWS API calls in Swift.'
 
 # This description is used to generate tags and improve search results.
@@ -40,4 +40,5 @@ Pod::Spec.new do |s|
   s.dependency 'AWSCognito'
   s.dependency 'AWSCognitoIdentityProvider'
   s.dependency 'AWSDynamoDB'
+  s.dependency 'AWSS3'
 end
