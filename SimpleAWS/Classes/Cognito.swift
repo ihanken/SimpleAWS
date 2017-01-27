@@ -107,7 +107,7 @@ public class Cognito {
         for (key, value) in attributes { attributeArray.append(AWSCognitoIdentityUserAttributeType(name: key, value: value)) }
         
         // Sign the user up.
-        userPool?.signUp(username, password: password, userAttributes: attributeArray, validationData: nil).continue(with: AWSExecutor.mainThread(), with: {(task: AWSTask!) -> AnyObject! in
+        userPool?.signUp(username, password: password, userAttributes: attributeArray, validationData: nil).continueWith(executor: AWSExecutor.mainThread()) { (task: AWSTask!) -> AnyObject! in
             if task.error != nil {
                 print(task.error!)
                 
@@ -121,14 +121,14 @@ public class Cognito {
             }
             
             return nil
-        })
+        }
         
         return self
     }
     
     // Log the user in.
     public func logIn(userPassword: String) -> Self {
-        user?.getSession(userEmail!, password: userPassword, validationData: nil).continue(with: AWSExecutor.mainThread(), with: {(task: AWSTask!) -> AnyObject! in
+        user?.getSession(userEmail!, password: userPassword, validationData: nil).continueWith(executor: AWSExecutor.mainThread()) { (task: AWSTask!) -> AnyObject! in
             self.handleBlock(task: task as! AWSTask<AnyObject>)
             
             // Initialize or pull dataset.
@@ -136,86 +136,86 @@ public class Cognito {
             self.dataset = self.syncClient?.openOrCreateDataset("UserSettings")
             
             return nil
-        })
+        }
         
         return self
     }
     
     // Confirm a user..
     public func confirm(confirmationString: String) -> Self {
-        user?.confirmSignUp(confirmationString).continue(with: AWSExecutor.mainThread(), with: {(task: AWSTask!) -> AnyObject! in
+        user?.confirmSignUp(confirmationString).continueWith(executor: AWSExecutor.mainThread()) { (task: AWSTask!) -> AnyObject! in
             self.handleBlock(task: task as! AWSTask<AnyObject>)
             return nil
-        })
+        }
         
         return self
     }
     
     public func resendConfirmation() -> Self {
-        user?.resendConfirmationCode().continue(with: AWSExecutor.mainThread(), with: {(task: AWSTask!) -> AnyObject! in
+        user?.resendConfirmationCode().continueWith(executor: AWSExecutor.mainThread()) { (task: AWSTask!) -> AnyObject! in
             self.handleBlock(task: task as! AWSTask<AnyObject>)
             return nil
-        })
+        }
         
         return self
     }
     
     // Send a request for a forgotten password code to be sent to the user's email.
     public func forgotPassword() -> Self {
-        user?.forgotPassword().continue(with: AWSExecutor.mainThread(), with: {(task: AWSTask!) -> AnyObject! in
+        user?.forgotPassword().continueWith(executor: AWSExecutor.mainThread()) { (task: AWSTask!) -> AnyObject! in
             self.handleBlock(task: task as! AWSTask<AnyObject>)
             return nil
-        })
+        }
         
         return self
     }
     
     // Confirm that the user that requested a password reset is the correct user.
     public func confirmForgotPassword(confirmationString: String, passcode: String) -> Self {
-        user?.confirmForgotPassword(confirmationString, password: passcode).continue(with: AWSExecutor.mainThread(), with: {(task: AWSTask!) -> AnyObject! in
+        user?.confirmForgotPassword(confirmationString, password: passcode).continueWith(executor: AWSExecutor.mainThread()) { (task: AWSTask!) -> AnyObject! in
             self.handleBlock(task: task as! AWSTask<AnyObject>)
             return nil
-        })
+        }
         
         return self
     }
     
     // Change the current user's password.
     public func changePassword(currentPassword: String, proposedPassword: String) -> Self {
-        user?.changePassword(currentPassword, proposedPassword: proposedPassword).continue(with: AWSExecutor.mainThread(), with: {(task: AWSTask!) -> AnyObject! in
+        user?.changePassword(currentPassword, proposedPassword: proposedPassword).continueWith(executor: AWSExecutor.mainThread()) { (task: AWSTask!) -> AnyObject! in
             self.handleBlock(task: task as! AWSTask<AnyObject>)
             return nil
-        })
+        }
         
         return self
     }
     
     // Verify a given user attribute.
     public func verifyUserAtrribute(attribute: String, code: String) -> Self {
-        user?.verifyAttribute(attribute, code: code).continue(with: AWSExecutor.mainThread(), with: {(task: AWSTask!) -> AnyObject! in
+        user?.verifyAttribute(attribute, code: code).continueWith(executor: AWSExecutor.mainThread()) { (task: AWSTask!) -> AnyObject! in
             self.handleBlock(task: task as! AWSTask<AnyObject>)
             return nil
-        })
+        }
         
         return self
     }
     
     // Get details of the current user.
     public func getUserDetails() -> Self {
-        user?.getDetails().continue(with: AWSExecutor.mainThread(), with: {(task: AWSTask!) -> AnyObject! in
+        user?.getDetails().continueWith(executor: AWSExecutor.mainThread()) { (task: AWSTask!) -> AnyObject! in
             self.handleBlock(task: task as! AWSTask<AnyObject>)
             return nil
-        })
+        }
         
         return self
     }
     
     // Delete the current user.
     public func deleteUser() -> Self {
-        user?.delete().continue(with: AWSExecutor.mainThread(), with: {(task: AWSTask!) -> AnyObject! in
+        user?.delete().continueWith(executor: AWSExecutor.mainThread()) { (task: AWSTask!) -> AnyObject! in
             self.handleBlock(task: task)
             return nil
-        })
+        }
         
         return self
     }
@@ -228,7 +228,7 @@ public class Cognito {
     public func removeData(key: String) { dataset?.removeObject(forKey: key) }
     
     public func syncData() -> Self {
-        dataset?.synchronize().continue(with: AWSExecutor.mainThread(), with: {(task: AWSTask!) -> AnyObject! in
+        dataset?.synchronize().continueWith(executor: AWSExecutor.mainThread()) { (task: AWSTask!) -> AnyObject! in
             if task.isCancelled {
                 print("Task cancelled.")
             }
@@ -243,14 +243,14 @@ public class Cognito {
             }
             
             return nil
-        })
+        }
         
         return self
         
     }
     
     public func getRecords() -> [AWSCognitoRecord] {
-        if let records = dataset?.getAllRecords() as? [AWSCognitoRecord] {
+        if let records = dataset?.getAllRecords() {
             return records
         }
         

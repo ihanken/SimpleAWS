@@ -18,7 +18,7 @@ class S3Tests: XCTestCase {
     override func setUp() {
         super.setUp()
         // Put setup code here. This method is called before the invocation of each test method in the class.
-        S3.shared.initializeS3(region: .usWest2, identityPoolID: "us-west-2:af80910b-3da5-4866-b343-f61e7f50f173", bucketName: "simpleawsbucket")
+        S3.shared.initializeS3(region: .USWest2, identityPoolID: "us-west-2:af80910b-3da5-4866-b343-f61e7f50f173", bucketName: "simpleawsbucket")
     }
     
     override func tearDown() {
