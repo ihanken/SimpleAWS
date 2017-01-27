@@ -1,14 +1,14 @@
 PODS:
-  - AWSCognito (2.4.16):
-    - AWSCore (= 2.4.16)
-  - AWSCognitoIdentityProvider (2.4.16):
-    - AWSCore (= 2.4.16)
-  - AWSCore (2.4.16)
-  - AWSDynamoDB (2.4.16):
-    - AWSCore (= 2.4.16)
-  - AWSS3 (2.4.16):
-    - AWSCore (= 2.4.16)
-  - SimpleAWS (0.1.51):
+  - AWSCognito (2.5.0):
+    - AWSCore (= 2.5.0)
+  - AWSCognitoIdentityProvider (2.5.0):
+    - AWSCore (= 2.5.0)
+  - AWSCore (2.5.0)
+  - AWSDynamoDB (2.5.0):
+    - AWSCore (= 2.5.0)
+  - AWSS3 (2.5.0):
+    - AWSCore (= 2.5.0)
+  - SimpleAWS (0.1.61):
     - AWSCognito
     - AWSCognitoIdentityProvider
     - AWSCore
@@ -23,13 +23,13 @@ EXTERNAL SOURCES:
     :path: "../"
 
 SPEC CHECKSUMS:
-  AWSCognito: 666dba6eb65ac27faad79e83febf25630913aefc
-  AWSCognitoIdentityProvider: 1c74bb819fc5f74a708a4a8e0be8b235a959ab86
-  AWSCore: 7c3c129991e6387bcbad7132bc3661e7135754db
-  AWSDynamoDB: e6fc88dca72b2efee4492729d96ed945b9f3a224
-  AWSS3: fef6aa8f8f625df8f67f1b6574fe761f3a4ddc99
-  SimpleAWS: 2871c1f1b36aa5a2dee663ba23af5006d1aebbab
+  AWSCognito: 5a1af0c4b351de1ec8d523d3ed0aecce42dd630e
+  AWSCognitoIdentityProvider: 63c70d5e859fb34c202cf13b69bb3dc59d2d5a71
+  AWSCore: e9839d27ceaa2db75934a9c418630ce63c23e347
+  AWSDynamoDB: 81b3523f113dacf53c071965662b7056ad866709
+  AWSS3: 3678dd99006ff77c825fb857fc7cbaca0db848c6
+  SimpleAWS: 38a0e3d28a5a11c88ceaa0ad7f7fe8d866cbdb99
 
 PODFILE CHECKSUM: cef988a36b60f0dadf709c2f15a7135a50360050
 
-COCOAPODS: 1.2.0.beta.3
+COCOAPODS: 1.1.1

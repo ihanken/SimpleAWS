@@ -71,10 +71,10 @@ public class S3 {
         downloadRequest?.downloadingFileURL = downloadPath
         
         
-        manager?.download(downloadRequest).continue({(task: AWSTask!) -> AnyObject! in
+        manager?.download(downloadRequest!).continueWith { (task: AWSTask!) -> AnyObject! in
             self.handleBlock(task: task)
             return nil
-        })
+        }
         
         return self
     }
@@ -86,10 +86,10 @@ public class S3 {
         uploadRequest?.key = key
         uploadRequest?.body = imagePath
         
-        manager?.upload(uploadRequest).continue({(task: AWSTask!) -> AnyObject! in
+        manager?.upload(uploadRequest!).continueWith { (task: AWSTask!) -> AnyObject! in
             self.handleBlock(task: task)
             return nil
-        })
+        }
         
         return self
     }
